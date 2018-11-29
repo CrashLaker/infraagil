@@ -1,0 +1,11 @@
+---
+
+
+- name: instala docker
+  hosts: docker
+  tasks:
+    - name: baixa script web
+      shell: curl -fsSL https://get.docker.com -o /root/get-docker.sh
+
+    - name: executa script instalacao docker
+      shell: sh /root/get-docker.sh

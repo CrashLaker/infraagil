@@ -1,0 +1,63 @@
+---
+- name: exercicio
+  hosts: all
+  vars:
+    - seunome: carlos
+  tasks:
+    - name: cria usuario nome "{{ seunome }}"
+      user:
+        name: "{{ item }}"
+        state: present
+      with_items:
+        - devops
+        - developer
+        - "{{ seunome }}"
+
+    - name: instala pacotes
+      package:
+        name:
+          - htop
+          - vim
+          - cowsay
+          - figlet
+        state: present
+
+    - name: cria arquivo devops
+      file:
+        path: devops
+        state: touch
+      delegate_to: localhost
+
+    - name: popula arquivo devops
+      lineinfile:
+        path: devops
+        line: "sou devops"
+      delegate_to: localhost
+
+    - name: cria diretorio /srv
+      file:
+        path: /srv
+        state: directory
+
+    - name: copia ./devops para /src/devops 
+      copy:
+        src: devops
+        dest: /srv/devops
+
+    - name: cria arquivo index
+      file:
+        path: index
+        state: touch
+      delegate_to: localhost
+
+    - name: popula arquivo index
+      lineinfile:
+        path: index
+        line: "infra agil na 4linux"
+      delegate_to: localhost
+
+    - name: envia ./index para automation
+      copy:
+        src: index
+        dest: /srv/index
+      when: ansible_hostname == "automation"

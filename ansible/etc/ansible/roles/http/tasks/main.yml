@@ -1,0 +1,33 @@
+---
+# tasks file for http
+
+
+- name: instala servidor http
+  package:
+    name: apache2
+    state: present
+  when: ansible_os_family == "Debian"
+
+- name: instala servidor http centos
+  package:
+    name: httpd
+    state: present
+  when: ansible_os_family == "RedHat"
+
+- name: sobe servico debian
+  systemd:
+    name: apache2
+    state: started
+  when: ansible_os_family == "Debian"
+
+- name: sobe servico centos
+  systemd:
+    name: httpd
+    state: started
+  when: ansible_os_family == "RedHat"
+    
+- name: envia arquivo index
+  template:
+    src: index
+    dest: /var/www/html/index.html
+    

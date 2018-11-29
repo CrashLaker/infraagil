@@ -1,0 +1,13 @@
+---
+
+- name: criando os usuarios padroes para todas as maquinas
+  user: 
+    name: "{{ item.name }}"
+    password: "{{ item.password }}"
+    state: "{{ item.state }}"
+    home: "{{ item.home }}"
+  with_items:
+    - { name: 'devops', password: '$1$AfdgH.rc$E9MieW1Tbfw2UJPOkxrc30', state: 'present', home: '/srv/devops' }
+    - { name: 'developer', password: '$1$AfdgH.rc$E9MieW1Tbfw2UJPOkxrc30', state: 'present', home: '/srv/developer' }
+    - { name: 'carlos', password: '$1$AfdgH.rc$E9MieW1Tbfw2UJPOkxrc30', state: 'present', home: '/srv/carlos' }
+

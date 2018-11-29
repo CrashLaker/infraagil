@@ -1,0 +1,16 @@
+
+
+
+<marquee>
+
+<h1>
+
+HOSTNAME DA MAQUINA = {{ ansible_hostname }}
+
+<br>
+
+DISTRO DA MAQUINA = {{ ansible_os_family }}
+
+</h1>
+
+</marquee>
