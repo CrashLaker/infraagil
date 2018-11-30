@@ -1,0 +1,24 @@
+---
+# tasks file for container-docker
+#
+
+
+- name: cria volume estatico docker
+  docker_volume:
+    name: "{{ item }}"
+    state: present
+  with_items:
+    - blue
+    - green
+
+- name: cria container blue e green
+  docker_container:
+    name: "{{ item }}" 
+    image: httpd
+    state: started
+    volumes: 
+      - "{{ item }}:/usr/local/apache2/htdocs"
+  with_items:
+    - blue
+    - green
+

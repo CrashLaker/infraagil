@@ -1,0 +1,10 @@
+- name: lol
+  hosts: all
+  tasks:
+
+    - stat:
+        path: /tmp/lol
+      register: lol
+      when: False
+
+    - debug: msg="{{lol}}"
